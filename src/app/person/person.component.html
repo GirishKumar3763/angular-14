@@ -1,0 +1,154 @@
+<div class="container">
+    <button  class="btn btn-md btn-outline-primary" (click)="open(contentPerson)">add person</button>
+</div>
+
+
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Person Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.personId}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef> first name </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> last name </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
+    </ng-container>
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef> Age </th>
+      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+  
+    <ng-continer matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> actions</th>
+        <td mat-cell *matCellDef="let myRowData" class="actionGroup">
+            <button mat-button (click)="openEdit(contentEdit,myRowData)" >
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-button (click)="onDelete(myRowData)">
+                <mat-icon>delete</mat-icon>
+            </button>
+
+        </td>
+    </ng-continer>
+
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <ng-template #contentEdit let-modal>
+    <div class="modal-header" >
+        <h4 class="modal-title" id="modal-basic-title">Edit Person</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editPerson">
+            <div class="form-group">
+                <label for="personId">id</label>
+                <div class="input-group">
+                    <input formControlName="personId"
+                    class="form-control"
+                    />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName">first name</label>
+                <div class="input-group">
+                    <input formControlName="firstName"
+                    class="form-control"
+                    />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">last name</label>
+                <div class="input-group">
+                    <input formControlName="lastName"
+                    class="form-control"
+                    />
+                </div>
+            </div>
+        <div class="form-group">
+            <label for="age">age</label>
+            <div class="input-group">
+                <input formControlName="age"
+                class="form-control"
+                />
+            </div>
+        </div>
+
+        <div class="text-center mt-2">
+            <button
+            type="submit"
+           data-dismiss="modal"
+            class="btn btn-info"
+            (click)="onSave()"
+            > save</button>
+        </div>
+
+        </form>
+        </div>
+  </ng-template>
+  <ng-template #contentPerson let-modal>
+    <div class="modal-header" >
+        <h4 class="modal-title" id="modal-basic-title">Add new person</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="newPerson" (ngSubmit)="onSubmitPerson()">
+            <div class="form-group">
+                <label for="firstName">first name</label>
+                <div class="input-group">
+                    <input formControlName="firstName"
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    class="form-control"
+                    required
+                    />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">last name</label>
+                <div class="input-group">
+                    <input formControlName="lastName"
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    class="form-control"
+                    required
+                    />
+                </div>
+            </div>
+        <div class="form-group">
+            <label for="age">age</label>
+            <div class="input-group">
+                <input formControlName="age"
+                type="number"
+                name="age"
+                id="age"
+                class="form-control"
+                required
+                />
+            </div>
+        </div>
+
+        <div class="text-center mt-2">
+            <button
+            type="submit"
+           
+            class="btn btn-info"
+            > submit</button>
+        </div>
+
+        </form>
+        </div>
+  </ng-template>

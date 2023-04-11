@@ -1,0 +1,13 @@
+table {
+    width: 75%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+    padding-left: 20%;
+    padding-top: 10%;
+    position: center;
+  }
+  th.mat-header-cell {
+    text-align: left;
+    max-width: 300px;
+  }
